@@ -2,7 +2,6 @@ import optparse
 import errorHandler
 import os
 import sys
-
 def readCommand(argv):
     parser = optparse.OptionParser()
     parser.add_option('-m','--model',
@@ -64,23 +63,22 @@ def _printEulerSIRDData(data,deltaT = 1):
 def _readEulerTestcase(filename):
     f=open(filename,'r')
     result = []
-    l=f.readline()
-    while(l):
-        l=l.replace("\n","")
-        result.append(float(l))
-        l=f.readline()
+    rows = []
+    for line in f:
+        row = line.split()
+        result.append(float(row[1]))
     return result
 
 if __name__ == '__main__':
     options = readCommand(sys.argv)
     if(options.model == "SIR"):
         if(options.testcase == None):
-            errorHandler.commandMissing("--testcase")
+            Euler_SIR("./testcase/Euler/SIR.txt",options.step)
         else:
             Euler_SIR("./testcase/Euler/"+options.testcase,options.step)
     elif(options.model == "SIRD"):
         if(options.testcase == None):
-            errorHandler.commandMissing("--testcase")
+            Euler_SIRD("./testcase/Euler/SIRD.txt",options.step)
         else:
             Euler_SIRD("./testcase/Euler/"+options.testcase,options.step)
     else:
