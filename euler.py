@@ -34,15 +34,15 @@ def Euler_SIR(filename, step):
         S = S + dS
         I = I + dI
         R = R + dR
-        result.append((0+i*dentaT, S, I, R))
+        result.append((1+i*dentaT, S, I, R))
     _printEulerSIRData(result)
     return result
 
 
 def _printEulerSIRData(data):
-    print("Ngày\tCó nguy cơ\tCa nhiễm\tCa hồi phục")
+    print("Tuần\tCó nguy cơ\tCa nhiễm\tCa hồi phục")
     for i in range(len(data)):
-        print(data[i][0], "\t %0.5f" %
+        print(int(data[i][0]), "\t %0.5f" %
               data[i][1], "\t %0.5f" % data[i][2], "\t %0.5f" % data[i][3])
 
 
@@ -60,13 +60,13 @@ def Euler_SIRD(filename, step):
         I = I + dI
         R = R + dR
         D = D + dD
-        result.append((0+i*dentaT, S, I, R, D))
+        result.append((1+i*dentaT, S, I, R, D))
     _printEulerSIRDData(result)
     return result
 
 
 def _printEulerSIRDData(data, deltaT=1):
-    print("Ngày\tCó nguy cơ\tCa nhiễm\tCa hồi phục\tCa chết")
+    print("Tuần\tCó nguy cơ\tCa nhiễm\tCa hồi phục\tCa chết")
     for i in range(len(data)):
         print(data[i][0], "\t %0.5f" % data[i][1], "\t %0.5f" %
               data[i][2], "\t %0.5f" % data[i][3], "\t %0.5f" % data[i][4])

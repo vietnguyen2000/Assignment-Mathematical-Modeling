@@ -1,4 +1,4 @@
-deltaDays   1
+deltaWeeks   1
 Beta        0.002
 Gamma       0.5
 S           800
