@@ -75,11 +75,10 @@ def _printEulerSIRDData(data, deltaT=1):
 def _readEulerTestcase(filename):
     f = open(filename, 'r')
     result = []
-    l = f.readline()
-    while(l):
-        l = l.replace("\n", "")
-        result.append(float(l))
-        l = f.readline()
+    rows = []
+    for line in f:
+        row = line.split()
+        result.append(float(row[1]))
     return result
 
 
