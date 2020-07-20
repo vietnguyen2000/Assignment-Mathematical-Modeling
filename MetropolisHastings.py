@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 
 
 mean = np.array([0.5, 0.5])
-cov = np.array([[1.0, 0.7],
-                [0.7,1.2]])
+cov = np.array([[0.5, 0.],
+                [0.,0.5]])
 
 def proposalDistribution(Beta, Gamma):
     # probability distribution function
@@ -23,9 +23,9 @@ def pFunc(xStar, x):
     return st.multivariate_normal.pdf(xStar, x)
 
 lambdaBeta= 0.5
-nuBeta = 0.1
+nuBeta = 1
 lambdaGamma= 0.5
-nuGamma = 0.1
+nuGamma = 1
 
 def gammaDistribution(Beta,Gamma):
     """
@@ -89,7 +89,7 @@ def metropolisHastings(iter, piFunc, proposalDistribution = proposalDistribution
 
 
 if __name__ == '__main__':
-    result = metropolisHastings(10000, gammaDistribution)
+    result = metropolisHastings(10000, gaussDistribution)
     sns.jointplot(x=result[:, 0], y=result[:, 1])
     print(result)
     plt.show()

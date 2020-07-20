@@ -15,11 +15,14 @@ import pandas as pd
 # Hàm hiện thực công thức 15:
 def calPosterior(X, Beta, Gamma):
     product = 1.
-    for Xi in X:
+    for i in range(len(X)):
+        if i ==0 : Xi = X[0]
+        else: Xi = X[i]-X[i-1]
         try:
             if Xi != 0:
                 # print(Gamma, Beta)
-                product *= (pow(Gamma, Beta)/gamma(Beta) * pow(Xi, (Beta - 1)) * pow(e, (-Gamma * Xi)))
+                # product *= (pow(Gamma, Beta)/gamma(Beta) * pow(Xi, (Beta - 1)) * pow(e, (-Gamma * Xi)))
+                product *= st.gamma.pdf(Xi,a=Gamma,scale= 1/Beta)
         # else:
         #     product = 0
         #     break
@@ -33,8 +36,8 @@ def calPosterior(X, Beta, Gamma):
         except ValueError:
             # pass
             print(Gamma, Beta, Xi)
-        # except OverflowError:
-        #     product = 0
+        except OverflowError:
+            print(pow(e, (-Gamma * Xi)))
     # product *= ((Gamma ** Beta)/gamma(Beta) ** len(X))
     # print(product)
     return product
@@ -60,11 +63,12 @@ if __name__ == '__main__':
     # Chọn các quốc gia: Germany (122), France (118), United Kingdom (225)
     indexes = [116, 120, 223]
     coeffs = list()
-    df = df.iloc[indexes,0:14]
+    df = df.iloc[indexes,0:200]
     # print(df.isna())
     for iter in df.iterrows():
         # Đi từ index 5 tương ứng ngày đầu tiên 01/22/20
         X = iter[1][5:].tolist()
+        # print(X)
         # X_norm = [float(i)/500000 for i in X]
         # print(X)
 
