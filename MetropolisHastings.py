@@ -33,11 +33,17 @@ def gammaDistribution(Beta,Gamma):
             Gamma   : float
     return π(β, γ) with gamma distribution
     """
-    # π(β,γ) = π(β)* π(γ)oj
+    # π(β,γ) = π(β)* π(γ)
     # piBeta = ((nuBeta**lambdaBeta)*(Beta**(lambdaBeta-1))*(e**(-nuBeta*Beta)))/gamma(lambdaBeta)
     # piGamma = ((nuGamma**lambdaGamma)*(Gamma**(lambdaGamma-1))*(e**(-nuGamma*Gamma)))/gamma(lambdaGamma)
+    # if isnan(piBeta) or isnan(piGamma):
+    #     piBeta = 0.0
+    #     piGamma = 0.0
     piBeta = st.gamma.pdf(Beta,a=lambdaBeta,scale = 1/nuBeta)
     piGamma = st.gamma.pdf(Gamma,a=lambdaGamma,scale = 1/nuGamma)
+
+    # print ([piBeta,piBeta1])
+    
     return piBeta*piGamma
 def gaussDistribution(Beta,Gamma):
     """
@@ -89,7 +95,7 @@ def metropolisHastings(iter, piFunc, proposalDistribution = proposalDistribution
 
 
 if __name__ == '__main__':
-    result = metropolisHastings(10000, gaussDistribution)
+    result = metropolisHastings(10000, gammaDistribution)
     sns.jointplot(x=result[:, 0], y=result[:, 1])
     print(result)
     plt.show()
