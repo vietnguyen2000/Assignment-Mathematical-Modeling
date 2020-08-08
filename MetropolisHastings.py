@@ -48,7 +48,6 @@ def gaussDistribution(Beta,Gamma):
     """
     return st.multivariate_normal.pdf((Beta,Gamma), mean,cov)
 
-
 def metropolisHastings(iter, piFunc, proposalDistribution = proposalDistribution, pFunc=None): 
     Beta0, Gamma0 = 1.,1.
     # Innitialize Beta0 and Gamma0 from fronterior probability distribution pi(Beta, Gamma).
