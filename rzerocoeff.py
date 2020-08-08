@@ -7,21 +7,16 @@ from math import *
 import scipy.stats as st
 import seaborn as sns
 import matplotlib.pyplot as plt
-from MetropolisHastings import metropolisHastings, gammaDistribution, pFunc, gaussDistribution
+from metropolishastings import metropolisHastings, gammaDistribution, pFunc, gaussDistribution
 
-# from MetropolisHastings import metropolisHastings
 import pandas as pd
 
 # Hàm hiện thực công thức 15:
-
-
 def calPosterior(x, Beta, Gamma):
     pi = st.gamma.pdf(x, a=Beta, scale=1/Gamma)
     return np.prod(pi)
 
 # Hàm hiện thực công thức 21:
-
-
 def calCoeff(X, samples):
     rzero = 0
     pi = []
@@ -43,7 +38,7 @@ if __name__ == '__main__':
     df = pd.read_csv(url, error_bad_lines=False)
     df2 = pd.read_csv(url2, error_bad_lines=False)
     df3 = pd.read_csv(url3, error_bad_lines=False)
-    # Chọn các quốc gia: France Germany, Italy
+    # Chọn các quốc gia: France, Germany, Italy
     indexes1 = [116, 120, 137]
     indexes2 = [116, 120, 137]
     indexes3 = [108, 112, 131]
